@@ -49,7 +49,7 @@
                         };
             })();
 
-            var theAnimator = animator;
+            var theAnimator = new animator(); //TODO: Consider making a constructor
 
             function animloop() {
                 requestAnimationFrame(animloop);
