@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Canvas Fun</title>
+    <script src="scripts/Animate.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", eventWindowLoaded, false);
 
@@ -36,12 +37,6 @@
             }
 
             var context = theCanvas.getContext("2d");
-            var alpha = 0;
-            var fadeIn = true;
-            var text = "Hello World";
-            // image
-            var helloWorldImage = new Image();
-            helloWorldImage.src = "images/html5bg.jpg";
 
             window.requestAnimationFrame = (function() {
                 return window.requestAnimationFrame ||
@@ -54,50 +49,18 @@
                         };
             })();
 
+            var theAnimator = animator;
+
             function animloop() {
                 requestAnimationFrame(animloop);
-                drawScreen();
+                theAnimator.drawScreen(context);
             }
 
-            function drawScreen() {
-                // background
-                context.globalAlpha = 1;
-                context.fillStyle = "#000000";
-                context.fillRect(0, 0, 640, 480);
-
-                // image
-                context.globalAlpha = .25;
-                context.drawImage(helloWorldImage, 0, 0);
-
-                // fade in/out
-                if (fadeIn) {
-                    alpha += .01;
-                    if (alpha >= 1) {
-                        alpha = 1;
-                        fadeIn = false;
-                    }
-                } else {
-                    alpha -= .01;
-                    if (alpha <= 0) {
-                        alpha = 0;
-                        fadeIn = true;
-                    }
-                }
-
-                context.globalAlpha = alpha;
-
-                // text
-                context.fillStyle = "#ffffff";
-                context.font = "72px Sans-Serif";
-                context.textBaseline = "top";
-                context.fillText(text, 150, 200)
-            }
+            theAnimator.setup(context, animloop);
 
             Debugger.log("Drawing Canvas");
 
-            helloWorldImage.onload = function () {
-                animloop();
-            }
+
 
         }
     </script>
