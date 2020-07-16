@@ -32,7 +32,7 @@ var animator = {
         this.context.drawImage(this.helloWorldImage, 0, 0);
 
         // fade in/out
-        if (this.fadeIn) {
+        if (this.fadeIn) { 
             this.alpha += .01;
             if (this.alpha >= 1) {
                 this.alpha = 1;

@@ -1,68 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Canvas Fun</title>
+    <script src="scripts/CanvasAnimator.js"></script>
     <script src="scripts/Animate.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", eventWindowLoaded, false);
 
-        var Debugger = function() {
-        };
-        Debugger.log = function (message){
-            try {
-                console.log(message);
-            }
-            catch (exception) {
-                return;
-            }
-        };
 
         function eventWindowLoaded() {
-            canvasApp();
+            canvasApp("canvasOne");
         }
 
-        function canvasApp() {
-            var theCanvas = document.getElementById("canvasOne");
 
-            function CanvasSupport() {
-                if (!theCanvas || !theCanvas.getContext) {
-                    return false;
-                }
-                return true;
-            }
-
-            if (!CanvasSupport()) {
-                return;
-            }
-
-            var context = theCanvas.getContext("2d");
-
-            window.requestAnimationFrame = (function() {
-                return window.requestAnimationFrame ||
-                                window.webkitRequestAnimationFrame ||
-                                window.mozRequestAnimationFrame ||
-                                window.oRequestAnimationFrame ||
-                                window.msRequestAnimationFrame ||
-                        function (callback) {
-                            window.setTimeout(callback, 1000/60);
-                        };
-            })();
-
-            var theAnimator = animator; //TODO: Consider making a constructor
-
-            function animloop() {
-                requestAnimationFrame(animloop);
-                theAnimator.drawScreen(context);
-            }
-
-            theAnimator.setup(context, animloop);
-
-            Debugger.log("Drawing Canvas");
-
-
-
-        }
     </script>
 </head>
 <body>
